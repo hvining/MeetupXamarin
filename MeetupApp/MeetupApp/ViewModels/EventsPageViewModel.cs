@@ -39,11 +39,6 @@ namespace MeetupApp.ViewModels
 
             //Get Categories
             CategoryOptions = new ObservableCollection<Category>();
-            CategoryOptions.CollectionChanged += (s, e) =>
-            {
-                RaisePropertyChanged(nameof(HasCategoryOptions));
-            };
-            GetCategories(true);
 
             SearchResults = new ObservableCollection<Result>();
             SearchResults.CollectionChanged += (s, e) =>
@@ -85,12 +80,18 @@ namespace MeetupApp.ViewModels
 
             using (HttpClient http = new HttpClient())
             {
-                String str = await http.GetStringAsync(url);
-                var categories = JsonConvert.DeserializeObject<MeetupCategory>(str);
-
-                foreach (var category in categories.results)
+                try
                 {
-                    CategoryOptions.Add(category);
+                    String str = await http.GetStringAsync(url);
+                    var categories = JsonConvert.DeserializeObject<MeetupCategory>(str);
+
+                    foreach (var category in categories.results)
+                    {
+                        CategoryOptions.Add(category);
+                    }
+                }
+                catch (Exception ex)
+                {
                 }
 
                 CategoryOptions.Insert(0, new Category { name = "All", shortname = "All", id = 0 });
@@ -284,6 +285,7 @@ namespace MeetupApp.ViewModels
 
         public void OnNavigatingTo(NavigationParameters parameters)
         {
+            GetCategories(true);
         }
         #endregion
 
