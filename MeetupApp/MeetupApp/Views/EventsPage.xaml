@@ -79,7 +79,7 @@
                                Grid.Row="4"/>
                         <Picker SelectedItem="{Binding Category, Mode=TwoWay}"
                                 ItemsSource="{Binding CategoryOptions}"
-                                IsEnabled="{Binding HasCategoryOptions}"
+                                
                                 ItemDisplayBinding="{Binding shortname}"
                             />
                     </StackLayout>
