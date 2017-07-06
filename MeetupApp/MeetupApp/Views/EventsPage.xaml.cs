@@ -46,6 +46,13 @@ namespace MeetupApp.Views
 
                 //venueMap.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(venueViewModel.Latitude, venueViewModel.Longitude), Distance.FromMiles(1)));
             });
+
+
+            MessagingCenter.Subscribe<EventsPageViewModel>(this, "LocationUpdated", eventsPageViewModel =>
+            {
+                var position = eventsPageViewModel.Position;
+                eventsMap.MoveToRegion(MapSpan.FromCenterAndRadius(position, Distance.FromMiles(1)));
+            });
         }
     }
 }

@@ -111,7 +111,7 @@
                                 <DataTemplate>
                                     <ViewCell>
                                         <ViewCell.View>
-                                            <Grid>
+                                            <Grid Margin="10">
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="auto"/>
                                                     <RowDefinition Height="auto"/>
@@ -133,12 +133,12 @@
                                                 <Label Margin="10,0,0,0"
                                                         Grid.Column="1"
                                                         Grid.Row="1"
-                                                        Text="{Binding members}">
+                                                        Text="{Binding members, StringFormat='Number of Members: {0:N}'}">
                                                 </Label>
                                                 <Label Margin="10,0,0,0"
                                                         Grid.Column="1"
                                                         Grid.Row="2"
-                                                        Text="{Binding rating}">
+                                                        Text="{Binding rating, StringFormat='Rating: {0:N}'}">
                                                 </Label>
                                             </Grid>
                                         </ViewCell.View>

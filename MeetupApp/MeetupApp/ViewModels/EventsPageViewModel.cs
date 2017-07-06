@@ -281,6 +281,8 @@ namespace MeetupApp.ViewModels
             {
                 Position = new Position(42.93708, -75.6107);
             }
+
+            MessagingCenter.Send(this, "LocationUpdated");
         }
 
         public void OnNavigatingTo(NavigationParameters parameters)
