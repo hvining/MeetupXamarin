@@ -94,6 +94,7 @@
                                        IsEnabled="True"
                                        IsRunning="{Binding IsLoading}"
                                        Color="White"
+                                       HorizontalOptions="CenterAndExpand"
                                        Grid.Row="2"/>
                 </Grid>
 
