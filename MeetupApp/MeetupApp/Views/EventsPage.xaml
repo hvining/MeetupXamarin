@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MeetupApp.Views.EventsPage"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:converters="clr-namespace:MeetupApp.Converters;assembly=MeetupApp"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps">
+
+    <ContentPage.Content>
+        <Grid BackgroundColor="#0CAFAF">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!--Header-->
+            <Grid>
+                <Label Text="MeetUp App"
+                       TextColor="White"
+                       FontSize="Medium"
+                       Margin="0, 20"/>
+            </Grid>
+
+            <!--Content-->
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <maps:Map WidthRequest="320" 
+                          HeightRequest="500"
+                          x:Name="eventsMap"
+                          IsShowingUser="True"
+                          MapType="Hybrid"/>
+
+                <Grid Margin="10"
+                      HorizontalOptions="CenterAndExpand"
+                      Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="Distance"
+                               TextColor="White"/>
+                        <Picker SelectedItem="{Binding Distance, Mode=TwoWay}"
+                            ItemsSource="{Binding DistanceOptions}"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical"
+                                 Margin="20, 0"
+                                 Grid.Column="1">
+                        <Label Text="Amount" 
+                               TextColor="White"
+                               Grid.Row="2"/>
+                        <Picker SelectedItem="{Binding PageSize, Mode=TwoWay}"
+                                ItemsSource="{Binding PageSizeOptions}"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical"
+                                 Grid.Column="2">
+                        <Label Text="Category" 
+                               TextColor="White"
+                               Grid.Row="4"/>
+                        <Picker SelectedItem="{Binding Category, Mode=TwoWay}"
+                                ItemsSource="{Binding CategoryOptions}"
+                                IsEnabled="{Binding HasCategoryOptions}"
+                                ItemDisplayBinding="{Binding shortname}"
+                            />
+                    </StackLayout>
+
+                    <Button Text="Search"
+                            Command="{Binding SearchCommand}"
+                            HorizontalOptions="Center"
+                            Grid.Row="1"
+                            Grid.ColumnSpan="3"/>
+
+                    <ActivityIndicator IsVisible="{Binding IsLoading}"
+                                       IsEnabled="True"
+                                       IsRunning="{Binding IsLoading}"
+                                       Color="White"
+                                       Grid.Row="2"/>
+                </Grid>
+
+                <Grid Grid.Column="1"
+                      Grid.RowSpan="2"
+                          BackgroundColor="White"
+                          IsVisible="{Binding HasSearchResults}"
+                      WidthRequest="200">
+
+                    <Grid>
+                        <ListView ItemsSource="{Binding SearchResults}"
+                                      SelectedItem="{Binding SelectedGroup, Mode=TwoWay}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <ViewCell.View>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="auto"/>
+                                                    <RowDefinition Height="auto"/>
+                                                    <RowDefinition Height="auto"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Image Source="{Binding group_photo.thumb_link}" 
+                                                           HeightRequest="50" 
+                                                           WidthRequest="50"
+                                                           Grid.RowSpan="5"/>
+
+                                                <Label Text="{Binding name}"
+                                                        FontAttributes="Bold"
+                                                        Margin="10,0,0,10"
+                                                        Grid.Column="1"/>
+                                                <Label Margin="10,0,0,0"
+                                                        Grid.Column="1"
+                                                        Grid.Row="1"
+                                                        Text="{Binding members}">
+                                                </Label>
+                                                <Label Margin="10,0,0,0"
+                                                        Grid.Column="1"
+                                                        Grid.Row="2"
+                                                        Text="{Binding rating}">
+                                                </Label>
+                                            </Grid>
+                                        </ViewCell.View>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
+
+                </Grid>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
