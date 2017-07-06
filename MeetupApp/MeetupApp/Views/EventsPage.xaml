@@ -19,7 +19,7 @@
                 <Label Text="MeetUp App"
                        TextColor="White"
                        FontSize="Medium"
-                       Margin="0, 20"/>
+                       Margin="10, 20"/>
             </Grid>
 
             <!--Content-->
@@ -62,7 +62,7 @@
                             ItemsSource="{Binding DistanceOptions}"/>
                     </StackLayout>
 
-                    <StackLayout Orientation="Vertical"
+                    <!--<StackLayout Orientation="Vertical"
                                  Margin="20, 0"
                                  Grid.Column="1">
                         <Label Text="Amount" 
@@ -70,7 +70,7 @@
                                Grid.Row="2"/>
                         <Picker SelectedItem="{Binding PageSize, Mode=TwoWay}"
                                 ItemsSource="{Binding PageSizeOptions}"/>
-                    </StackLayout>
+                    </StackLayout>-->
 
                     <StackLayout Orientation="Vertical"
                                  Grid.Column="2">
@@ -95,7 +95,8 @@
                                        IsRunning="{Binding IsLoading}"
                                        Color="White"
                                        HorizontalOptions="CenterAndExpand"
-                                       Grid.Row="2"/>
+                                       Grid.Row="2"
+                                       Grid.ColumnSpan="3"/>
                 </Grid>
 
                 <Grid Grid.Column="1"
@@ -107,40 +108,46 @@
                     <Grid>
                         <ListView ItemsSource="{Binding SearchResults}"
                                       SelectedItem="{Binding SelectedGroup, Mode=TwoWay}"
-                                  RowHeight="150">
+                                  RowHeight="200">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>
                                         <ViewCell.View>
                                             <Grid Margin="10">
                                                 <Grid.RowDefinitions>
-                                                    <RowDefinition Height="auto"/>
-                                                    <RowDefinition Height="auto"/>
-                                                    <RowDefinition Height="auto"/>
+                                                    <RowDefinition />
+                                                    <RowDefinition />
                                                 </Grid.RowDefinitions>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="auto"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                </Grid.ColumnDefinitions>
-                                                <Image Source="{Binding group_photo.thumb_link}" 
-                                                           HeightRequest="50" 
-                                                           WidthRequest="50"
-                                                           Grid.RowSpan="5"/>
 
-                                                <Label Text="{Binding name}"
+                                                <Image Source="{Binding group_photo.photo_link}" 
+                                                       Aspect="AspectFill"
+                                                        HeightRequest="200" 
+                                                        WidthRequest="125"
+                                                        Grid.RowSpan="2"/>
+
+                                                <Grid Grid.Row="1"
+                                                      VerticalOptions="End">
+                                                    <BoxView BackgroundColor="Black"
+                                                         Opacity=".4"
+                                                         VerticalOptions="End"
+                                                             BindingContext="{x:Reference Name=eventNameLabel}"
+                                                             HeightRequest="{Binding Path=Height}"
+                                                             Margin="10,0,0,10"/>
+                                                    
+                                                    <Label Text="{Binding name}"
+                                                           TextColor="White"
                                                         FontAttributes="Bold"
-                                                        Margin="10,0,0,10"
-                                                        Grid.Column="1"/>
-                                                <Label Margin="10,0,0,0"
-                                                        Grid.Column="1"
-                                                        Grid.Row="1"
-                                                        Text="{Binding members, StringFormat='Number of Members: {0:N}'}">
-                                                </Label>
-                                                <Label Margin="10,0,0,0"
-                                                        Grid.Column="1"
-                                                        Grid.Row="2"
-                                                        Text="{Binding rating, StringFormat='Rating: {0:N}'}">
-                                                </Label>
+                                                           x:Name="eventNameLabel"
+                                                        Margin="10,0,0,10"/>
+                                                    <!--<Label Margin="0,10,0,0"
+                                                        Text="{Binding members, StringFormat='Number of Members: {0:N}'}"
+                                                           TextColor="White">
+                                                    </Label>
+                                                    <Label Margin="0,10,0,0"
+                                                        Text="{Binding rating, StringFormat='Rating: {0:N}'}"
+                                                           TextColor="White">
+                                                    </Label>-->
+                                                </Grid>
                                             </Grid>
                                         </ViewCell.View>
                                     </ViewCell>

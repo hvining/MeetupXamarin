@@ -43,15 +43,14 @@ namespace MeetupApp.Views
                     //Add the newly created pin to the map
                     eventsMap.Pins.Add(pin);
                 }
-
-                //venueMap.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(venueViewModel.Latitude, venueViewModel.Longitude), Distance.FromMiles(1)));
+                
             });
 
 
             MessagingCenter.Subscribe<EventsPageViewModel>(this, "LocationUpdated", eventsPageViewModel =>
             {
                 var position = eventsPageViewModel.Position;
-                eventsMap.MoveToRegion(MapSpan.FromCenterAndRadius(position, Distance.FromMiles(1)));
+                eventsMap.MoveToRegion(MapSpan.FromCenterAndRadius(position, Distance.FromMiles(eventsPageViewModel.Distance)));
             });
         }
     }
