@@ -38,7 +38,8 @@
                           HeightRequest="500"
                           x:Name="eventsMap"
                           IsShowingUser="True"
-                          MapType="Hybrid"/>
+                          MapType="Hybrid"
+                          HorizontalOptions="CenterAndExpand"/>
 
                 <Grid Margin="10"
                       HorizontalOptions="CenterAndExpand"

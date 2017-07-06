@@ -93,7 +93,7 @@ namespace MeetupApp.ViewModels
                     CategoryOptions.Add(category);
                 }
 
-                CategoryOptions.Insert(0, new Category { name = "All" });
+                CategoryOptions.Insert(0, new Category { name = "All", shortname = "All", id = 0 });
 
                 if (init)
                     Category = CategoryOptions.First();
