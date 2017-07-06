@@ -105,7 +105,8 @@
 
                     <Grid>
                         <ListView ItemsSource="{Binding SearchResults}"
-                                      SelectedItem="{Binding SelectedGroup, Mode=TwoWay}">
+                                      SelectedItem="{Binding SelectedGroup, Mode=TwoWay}"
+                                  RowHeight="150">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>
